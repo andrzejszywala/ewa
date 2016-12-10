@@ -1,0 +1,79 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+	<h1>Positions</h1>
+	<ol class="breadcrumb">
+		<li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+		<li class="active">Here</li>
+	</ol>
+</section>
+<!-- Main content -->
+<section class="content">
+	<!-- START closed positions -->
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">Closed positions</h3>
+				</div>
+				<div class="panel-body">
+					<div id="grid" ui-grid-selection ui-grid="gridOptions"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- END closed positions -->	
+	
+	<!-- START position details -->
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">Position details</h3>
+				</div>
+				<div class="panel-body">
+					<div class="col-md-4 col-lg-2 invoice-col">
+						<b>Position ID:</b> {{position.id}}<br/>
+						<b>Action:</b> {{position.action}}<br/> 
+						<b>Copy Trader Name:</b> {{position.copyTraderName}}<br/>
+						<b>Open Date:</b> {{position.openDate | date:'short'}}<br/> 
+						<b>Close Date:</b> {{position.closeDate | date:'short'}}<br/> 
+					</div>
+					<div class="col-md-4 col-lg-2 invoice-col">
+						<b>Open Rate:</b> {{position.openRate}}<br/>
+						<b>Close Rate:</b> {{position.closeRate}}<br/> 
+						<b>Take Profit Rate:</b> {{position.takeProfitRate}}<br/>
+						<b>Stop Loss Rate:</b> {{position.stopLossRate}}<br/> 
+						<b>Profit:</b> <span style="font-weight: bold;" ng-class="(position.profit >= 0) ? 'profit' : 'loos'">{{position.profit}}</span><br/> 
+					</div>
+					<div class="col-md-4 col-lg-2 invoice-col">
+						<b>Amount:</b> {{position.amount}}<br/>
+						<b>Units:</b> {{position.units}}<br/> 
+						<b>Spred:</b> {{position.spread}}<br/>
+						<b>Rollover Fees And Dividends:</b> {{position.rolloverFeesAndDividends}}<br/> 
+					</div>
+					<div class="col-md-12 col-lg-6 table-responsive">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>Date</th>
+									<th>Type</th>
+									<th>Realized Equity Change</th>
+									<th>Realized Equity</th>
+								</tr>
+							</thead>
+							<tbody>							
+								<tr ng-repeat="transaction in position.transactions">
+									<td>{{transaction.date | date:'dd.MM.yyyy HH:mm:ss'}}</td>
+									<td>{{transaction.type}}</td>
+									<td class="grid-column-number">{{transaction.realizedEquityChange}}</td>
+									<td class="grid-column-number">{{transaction.realizedEquity}}</td>
+								</tr>	
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- END position details -->
+</section>
